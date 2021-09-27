@@ -6,8 +6,8 @@ namespace GameArchitecture.GameEventListeners
 {
     public abstract class BaseGameEventListener<T, GE, UE> : MonoBehaviour where GE : BaseGameEvent<T> where UE : UnityEvent<T>
     {
-        [SerializeField] private GE gameEvent;
-        [SerializeField] private UE onEventTriggered;
+        [SerializeField] private GE gameEvent= null;
+        [SerializeField] private UE onEventTriggered = null;
 
 
 
