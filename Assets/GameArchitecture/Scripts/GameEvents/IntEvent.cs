@@ -2,6 +2,6 @@
 
 namespace GameArchitecture.GameEvents
 {
-    [CreateAssetMenu(fileName = "New IntEvent", menuName = "GameArchitecture/Events/IntEvent")]
+    [CreateAssetMenu(fileName = "NewIntEvent", menuName = "GameArchitecture/Events/IntEvent")]
     public class IntEvent : BaseGameEvent<int> { }
 }
