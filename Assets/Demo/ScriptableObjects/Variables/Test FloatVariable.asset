@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef16cc6ec543dc249bbbf9dd561e045d, type: 3}
   m_Name: Test FloatVariable
   m_EditorClassIdentifier: 
-  value: 2.59
+  value: 1
+  description: 
+  runtimeEditable: 0

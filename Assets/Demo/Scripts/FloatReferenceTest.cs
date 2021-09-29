@@ -7,6 +7,8 @@ public class FloatReferenceTest : MonoBehaviour
     [SerializeField] private FloatVariable testFloatVariable = null;
     [SerializeField] private FloatReference testFloatReference = null;
 
+
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))

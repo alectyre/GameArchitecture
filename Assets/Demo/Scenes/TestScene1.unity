@@ -975,13 +975,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662581555}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
 --- !u!1 &702858280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1755794411}
   - component: {fileID: 1755794412}
+  - component: {fileID: 1755794413}
   m_Layer: 0
   m_Name: Float Reference Test
   m_TagString: Untagged
@@ -1531,6 +1532,20 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: d31bcf6db3ecd054da1080e3bde9c53c, type: 2}
+--- !u!114 &1755794413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755794410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0924de47019fb458c89f07207d95f89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneChangeKey: 13
+  destinationSceneName: TestScene2
 --- !u!1 &1977094923
 GameObject:
   m_ObjectHideFlags: 0
