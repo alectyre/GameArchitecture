@@ -29,9 +29,9 @@ namespace GameArchitecture.Editor
             EditorGUI.BeginChangeCheck();
 
             // Get properties
-            SerializedProperty useConstant = property.FindPropertyRelative("UseConstant");
-            SerializedProperty constantValue = property.FindPropertyRelative("ConstantValue");
-            SerializedProperty variable = property.FindPropertyRelative("Variable");
+            SerializedProperty useConstant = property.FindPropertyRelative("useConstant");
+            SerializedProperty constantValue = property.FindPropertyRelative("constantValue");
+            SerializedProperty variable = property.FindPropertyRelative("value");
 
             // Calculate rect for configuration button
             Rect buttonRect = new Rect(position);

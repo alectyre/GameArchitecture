@@ -6,7 +6,6 @@ using GameArchitecture.Values;
 public class FloatReferenceTest : MonoBehaviour
 {
     [SerializeField] private Text floatValueText = null;
-    [SerializeField] private FloatValue testFloatVariable = null;
     [SerializeField] private FloatReference testFloatReference = null;
 
 
@@ -15,7 +14,7 @@ public class FloatReferenceTest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            testFloatVariable.Value += 1f;
+            testFloatReference.Value += 1;
         }
 
         floatValueText.text = testFloatReference.Value.ToString();

@@ -1393,11 +1393,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatValueText: {fileID: 1364963800}
-  testFloatVariable: {fileID: 11400000, guid: 71921e2d8d3134f928192692554ec351, type: 2}
   testFloatReference:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: 71921e2d8d3134f928192692554ec351, type: 2}
+    useConstant: 0
+    constantValue: 0
+    value: {fileID: 11400000, guid: 71921e2d8d3134f928192692554ec351, type: 2}
 --- !u!4 &799779357
 Transform:
   m_ObjectHideFlags: 0
@@ -1591,11 +1590,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatValueText: {fileID: 135395660}
-  testFloatVariable: {fileID: 11400000, guid: 48246ad26158e4186aff4e7edc0cd947, type: 2}
   testFloatReference:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: 48246ad26158e4186aff4e7edc0cd947, type: 2}
+    useConstant: 0
+    constantValue: 0
+    value: {fileID: 11400000, guid: 48246ad26158e4186aff4e7edc0cd947, type: 2}
 --- !u!4 &1102265892
 Transform:
   m_ObjectHideFlags: 0
@@ -1863,11 +1861,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatValueText: {fileID: 365610684}
-  testFloatVariable: {fileID: 11400000, guid: d31bcf6db3ecd054da1080e3bde9c53c, type: 2}
   testFloatReference:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: d31bcf6db3ecd054da1080e3bde9c53c, type: 2}
+    useConstant: 0
+    constantValue: 0
+    value: {fileID: 11400000, guid: d31bcf6db3ecd054da1080e3bde9c53c, type: 2}
 --- !u!114 &1755794413
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,14 +7,14 @@ namespace GameArchitecture.Editor
     public class BaseValueEditor : UnityEditor.Editor
     {
         SerializedProperty scriptProperty;
-        SerializedProperty dataTypeProperty;
+        SerializedProperty valueTypeProperty;
         SerializedProperty valueProperty;
         SerializedProperty runtimeValueProperty;
 
         void OnEnable()
         {
             scriptProperty = serializedObject.FindProperty("m_Script");
-            dataTypeProperty = serializedObject.FindProperty("dataType");
+            valueTypeProperty = serializedObject.FindProperty("valueType");
             valueProperty = serializedObject.FindProperty("value");
             runtimeValueProperty = serializedObject.FindProperty("runtimeValue");
         }
@@ -26,9 +26,9 @@ namespace GameArchitecture.Editor
             GUI.enabled = true;
 
             serializedObject.Update();
-            EditorGUILayout.PropertyField(dataTypeProperty);
+            EditorGUILayout.PropertyField(valueTypeProperty);
             EditorGUILayout.PropertyField(valueProperty);
-            if (dataTypeProperty.intValue != 0)
+            if (valueTypeProperty.intValue != 0)
             {
                 GUI.enabled = Application.isPlaying;
                 EditorGUILayout.PropertyField(runtimeValueProperty);
