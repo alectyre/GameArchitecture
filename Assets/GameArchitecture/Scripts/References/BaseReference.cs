@@ -5,8 +5,8 @@ namespace GameArchitecture.References
 {
     public abstract class BaseReference<T, V> where V : BaseValue<T>
     {
-        [SerializeField] public bool useConstant = false;
-        [SerializeField] public T constantValue;
+        [SerializeField] private bool useConstant = false;
+        [SerializeField] private T constantValue;
         [SerializeField] private V value = null;
 
         public T Value
