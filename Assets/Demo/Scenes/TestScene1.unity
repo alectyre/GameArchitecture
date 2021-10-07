@@ -1393,6 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatValueText: {fileID: 1364963800}
+  testFloatValue: {fileID: 11400000, guid: 71921e2d8d3134f928192692554ec351, type: 2}
   testFloatReference:
     useConstant: 0
     constantValue: 0
@@ -1590,6 +1591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatValueText: {fileID: 135395660}
+  testFloatValue: {fileID: 11400000, guid: 48246ad26158e4186aff4e7edc0cd947, type: 2}
   testFloatReference:
     useConstant: 0
     constantValue: 0
@@ -1861,6 +1863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatValueText: {fileID: 365610684}
+  testFloatValue: {fileID: 11400000, guid: d31bcf6db3ecd054da1080e3bde9c53c, type: 2}
   testFloatReference:
     useConstant: 0
     constantValue: 0

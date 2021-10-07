@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using GameArchitecture.Values;
+using System;
 
 namespace GameArchitecture.References
 {
     public abstract class BaseReference<T, V> where V : BaseValue<T>
     {
-        [SerializeField] private bool useConstant = false;
-        [SerializeField] private T constantValue;
-        [SerializeField] private V value = null;
+        [SerializeField] protected bool useConstant = false;
+        [SerializeField] protected T constantValue;
+        [SerializeField] protected V value = null;
 
         public T Value
         {
-            set { if (useConstant) { Debug.LogError("Trying to modify " + this.GetType().Name + " but it is set to Constant."); return; } this.value.Value = value; }
+            set { if (useConstant) { Debug.LogError("Trying to modify " + GetType().Name + " but it is set to Constant."); return; } this.value.Value = value; }
             get { return useConstant ? constantValue : value.Value; }
         }
 
@@ -23,6 +24,16 @@ namespace GameArchitecture.References
         public override string ToString()
         {
             return Value.ToString();
+        }
+
+        public void AddListenerOnValueChanged(Action<T> action)
+        {
+            value.AddListenerOnValueChanged(action);
+        }
+
+        public void RemoveListenerOnValueChanged(Action<T> action)
+        {
+            value.RemoveListenerOnValueChanged(action);
         }
     }
 }
