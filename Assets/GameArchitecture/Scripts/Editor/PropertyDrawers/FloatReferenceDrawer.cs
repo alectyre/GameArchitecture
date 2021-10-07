@@ -1,6 +1,6 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
-using GameArchitecture.GameReferences;
+using GameArchitecture.References;
 
 namespace GameArchitecture.Editor
 {

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using GameArchitecture.GameReferences;
-using GameArchitecture.GameVariables;
+using GameArchitecture.References;
+using GameArchitecture.Values;
 
 public class FloatReferenceTest : MonoBehaviour
 {
     [SerializeField] private Text floatValueText = null;
-    [SerializeField] private FloatVariable testFloatVariable = null;
+    [SerializeField] private FloatValue testFloatVariable = null;
     [SerializeField] private FloatReference testFloatReference = null;
 
 
