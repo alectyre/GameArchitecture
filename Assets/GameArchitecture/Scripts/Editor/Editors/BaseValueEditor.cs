@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameArchitecture.Editor
 {
-    public class BaseVariableEditor : UnityEditor.Editor
+    public class BaseValueEditor : UnityEditor.Editor
     {
         SerializedProperty scriptProperty;
         SerializedProperty dataTypeProperty;
