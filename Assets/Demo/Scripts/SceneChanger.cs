@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class SceneChanger : MonoBehaviour
 {
-    [SerializeField] private KeyCode sceneChangeKey;
-    [SerializeField] private string destinationSceneName;
+    [SerializeField] private KeyCode sceneChangeKey = KeyCode.A;
+    [SerializeField] private string destinationSceneName = "";
 
 
 
@@ -13,6 +13,11 @@ public class SceneChanger : MonoBehaviour
         if (Input.GetKeyDown(sceneChangeKey))
         {
             SceneManager.LoadScene(destinationSceneName);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 }

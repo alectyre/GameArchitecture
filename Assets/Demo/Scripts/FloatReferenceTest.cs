@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using GameArchitecture.GameReferences;
 using GameArchitecture.GameVariables;
 
 public class FloatReferenceTest : MonoBehaviour
 {
+    [SerializeField] private Text floatValueText = null;
     [SerializeField] private FloatVariable testFloatVariable = null;
     [SerializeField] private FloatReference testFloatReference = null;
 
@@ -16,6 +18,6 @@ public class FloatReferenceTest : MonoBehaviour
             testFloatVariable.Value += 1f;
         }
 
-        Debug.Log("TestFloatValue: " + testFloatReference);
+        floatValueText.text = testFloatReference.Value.ToString();
     }
 }
