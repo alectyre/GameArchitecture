@@ -11,8 +11,6 @@ namespace GameArchitecture.Events
 
         private readonly List<Action<T>> listeners = new List<Action<T>>();
 
-
-
         public string Description { get { return description; } }
 
         public void Raise(T item)

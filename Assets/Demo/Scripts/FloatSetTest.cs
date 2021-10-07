@@ -8,8 +8,6 @@ public class FloatSetTest : MonoBehaviour
     [SerializeField] private Text itemsText = null;
     [SerializeField] private Text runTimeItemsText = null;
 
-
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))

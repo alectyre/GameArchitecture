@@ -2,38 +2,24 @@
 
 namespace GameArchitecture.Values
 {
-    //TODO change names to BaseValue and FloatValue, because they can be set to constant?
     public abstract class BaseValue<T> : ScriptableObject
     {
         [SerializeField] protected T value;
         [SerializeField] protected ValueType valueType = ValueType.Variable;
         [SerializeField, TextArea(4, 20)] private string description = "";
         
-
-        
 #if UNITY_EDITOR
         /// <summary>
         /// Value is copied to runtimeValue when running in the editor to avoid overwriting seralized value.
         /// </summary>
-       [SerializeField]  private T runtimeValue;
+        [SerializeField]  private T runtimeValue;
 #endif
-
-
 
         public T Value
         {
 #if UNITY_EDITOR
             get { return runtimeValue; }
-            set
-            {
-                if (valueType == ValueType.Constant)
-                {
-                    Debug.LogError("Trying to modify " + GetType() + " " + name + " but it is set to Constant.");
-                    return;
-                }
-
-                runtimeValue = value;
-            }
+            set { if (valueType == ValueType.Constant) { Debug.LogError("Trying to modify " + GetType().Name + " " + name + " but it is set to Constant."); return; } runtimeValue = value; }
 #else
             get { return value; }
             set { if (dataType == DataType.Constant) return; this.value = value; }

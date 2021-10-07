@@ -11,7 +11,7 @@ namespace GameArchitecture.References
 
         public T Value
         {
-            set { if (useConstant) return; this.value.Value = value; }
+            set { if (useConstant) { Debug.LogError("Trying to modify " + this.GetType().Name + " but it is set to Constant."); return; } this.value.Value = value; }
             get { return useConstant ? constantValue : value.Value; }
         }
 
