@@ -1,27 +1,27 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using System;
+using UnityEngine.Events;
 
 namespace GameArchitecture.Values
 {
-    public abstract class BaseValue<T> : ScriptableObject
+    public abstract class BaseValue<T, E> : ScriptableObject where E : UnityEvent<T>
     {
-        [SerializeField] protected T value;
         [SerializeField] protected ValueType valueType = ValueType.Variable;
+        [SerializeField, Tooltip("Changes made to Value will be saved when exiting play mode.")] protected T value;
+#if UNITY_EDITOR
+        [SerializeField, Tooltip("RuntimeValue is used during play mode, and not saved.")] private T runtimeValue;
+#endif        
         [SerializeField, TextArea(4, 20)] private string description = "";
 
-#if UNITY_EDITOR
-        /// <summary> value is copied to runtimeValue when running in the editor to avoid overwriting seralized value. </summary>
-        [SerializeField]  private T runtimeValue;
-#endif
-
-        // Currently not supporting onValueChanged events in EditMode carrying over to PlayMode. If we want to change that, look at Button source.
-        [SerializeField] private List<Action<T>> onValueChangedListeners = new List<Action<T>>();
+        [Tooltip("OnValueChanged can only reference scene-wide objects such as other ScriptableObjects.")]
+        [Space, SerializeField] protected E onValueChanged;
 
         public T Value
         {
-#if UNITY_EDITOR
-            get { return runtimeValue; }
+//#if UNITY_EDITOR
+            //get { return runtimeValue; }
+            //set { SetValue(value, ref runtimeValue); }
+//#else
+            get { return value; }
             set
             {
                 if (valueType == ValueType.Constant)
@@ -29,65 +29,45 @@ namespace GameArchitecture.Values
                     Debug.LogError("Trying to modify " + GetType().Name + " " + name + " but it is set to Constant.");
                     return;
                 }
-                
-                bool valueChanged = !runtimeValue.Equals(value);
-                
-                runtimeValue = value;
-                
+
+                bool valueChanged = !this.value.Equals(value);
+
+                this.value = value;
+
                 if (valueChanged)
                 {
-                    RaiseOnValueChanged(Value);
+                    onValueChanged?.Invoke(value);
                 }
             }
-#else
-            get { return value; }
-            if (valueType == ValueType.Constant)
-                {
-                    Debug.LogError("Trying to modify " + GetType().Name + " " + name + " but it is set to Constant.");
-                    return;
-                }
-                
-                bool valueChanged = !this.value.Equals(value);
-                
-                this.value = value;
-                
-                if (valueChanged)
-                {
-                    RaiseOnValueChanged(Value);
-                }
-#endif
+//#endif
         }
+
+        public E OnValueChanged { get { return onValueChanged; } set { onValueChanged = value; } }
 
         public string Description { get { return description; } }
 
         public ValueType DataType { get { return valueType; } }
 
-        public static implicit operator T(BaseValue<T> reference)
+        public static implicit operator T(BaseValue<T, E> reference)
         {
             return reference.Value;
         }
 
-        public void AddListenerOnValueChanged(Action<T> action)
+        private void SetValue(T newValue, ref T value)
         {
-            if (!onValueChangedListeners.Contains(action))
+            if (valueType == ValueType.Constant)
             {
-                onValueChangedListeners.Add(action);
+                Debug.LogError("Trying to modify " + GetType().Name + " " + name + " but it is set to Constant.");
+                return;
             }
-        }
 
-        public void RemoveListenerOnValueChanged(Action<T> action)
-        {
-            if (!onValueChangedListeners.Contains(action))
-            {
-                onValueChangedListeners.Remove(action);
-            }
-        }
+            bool valueChanged = !value.Equals(newValue);
 
-        private void RaiseOnValueChanged(T item)
-        {
-            for (int i = onValueChangedListeners.Count - 1; i >= 0; i--)
+            value = newValue;
+
+            if (valueChanged)
             {
-                onValueChangedListeners[i]?.Invoke(item);
+                onValueChanged?.Invoke(value);
             }
         }
 
@@ -100,15 +80,5 @@ namespace GameArchitecture.Values
             runtimeValue = value;
 #endif
         }
-
-#if UNITY_EDITOR
-        protected virtual void OnValidate()
-        {
-            if (!Application.isPlaying)
-            {
-                runtimeValue = value;
-            }
-        }
-#endif
     }
 }

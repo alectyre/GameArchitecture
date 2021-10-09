@@ -6,35 +6,45 @@ namespace GameArchitecture.Editor
 {
     public class BaseValueEditor : UnityEditor.Editor
     {
-        SerializedProperty scriptProperty;
-        SerializedProperty valueTypeProperty;
-        SerializedProperty valueProperty;
-        SerializedProperty runtimeValueProperty;
+        private SerializedProperty valueTypeProperty;
+        private SerializedProperty valueProperty;
 
-        void OnEnable()
+        private void OnEnable()
         {
-            scriptProperty = serializedObject.FindProperty("m_Script");
             valueTypeProperty = serializedObject.FindProperty("valueType");
             valueProperty = serializedObject.FindProperty("value");
-            runtimeValueProperty = serializedObject.FindProperty("runtimeValue");
         }
 
         public override void OnInspectorGUI()
         {
-            GUI.enabled = false;
-            EditorGUILayout.PropertyField(scriptProperty);
-            GUI.enabled = true;
+            EditorGUI.BeginChangeCheck();
+            serializedObject.UpdateIfRequiredOrScript();
 
-            serializedObject.Update();
-            EditorGUILayout.PropertyField(valueTypeProperty);
-            EditorGUILayout.PropertyField(valueProperty);
-            if (valueTypeProperty.intValue != 0)
+            // Loop through properties and create one field (including children) for each top level property.
+            SerializedProperty property = serializedObject.GetIterator();
+            bool expanded = true;
+            while (property.NextVisible(expanded))
             {
-                GUI.enabled = Application.isPlaying;
-                EditorGUILayout.PropertyField(runtimeValueProperty);
-                GUI.enabled = true;
+                if ("runtimeValue" == property.propertyPath)
+                {
+                    if (valueTypeProperty.intValue == 0)
+                    {
+                        continue;
+                    }
+                    else using (new EditorGUI.DisabledScope(!Application.isPlaying))
+                    {
+                        property.floatValue = EditorGUILayout.FloatField(new GUIContent(property.displayName, property.tooltip), valueProperty.floatValue);
+                    }
+                }
+                else using (new EditorGUI.DisabledScope( "m_Script" == property.propertyPath))
+                {
+                    EditorGUILayout.PropertyField(property, true);
+                }
+                expanded = false;
             }
+
             serializedObject.ApplyModifiedProperties();
+            EditorGUI.EndChangeCheck();
         }
     }
 }

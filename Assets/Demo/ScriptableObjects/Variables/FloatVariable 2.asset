@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c973aff2d6a71ac44a3b34aeb26a2f81, type: 3}
   m_Name: FloatVariable 2
   m_EditorClassIdentifier: 
-  value: 10
   valueType: 1
+  value: 15
+  runtimeValue: 15
   description: 
-  runtimeValue: 10
+  onValueChanged:
+    m_PersistentCalls:
+      m_Calls: []

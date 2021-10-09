@@ -12,7 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c973aff2d6a71ac44a3b34aeb26a2f81, type: 3}
   m_Name: FloatVariable 3
   m_EditorClassIdentifier: 
-  value: 20
   valueType: 1
-  description: 
+  value: 20
   runtimeValue: 20
+  description: 
+  onValueChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b95f5fd6b3ef04dd599c439cb407eab7, type: 2}
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

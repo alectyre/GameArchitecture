@@ -3,5 +3,5 @@
 namespace GameArchitecture.References
 {
     [System.Serializable]
-    public class BoolReference : BaseReference<bool, BoolValue> { }
+    public class BoolReference : BaseReference<bool, BoolValue, BoolValueEvent> { }
 }

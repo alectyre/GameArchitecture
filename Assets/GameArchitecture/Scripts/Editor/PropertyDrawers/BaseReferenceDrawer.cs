@@ -29,9 +29,9 @@ namespace GameArchitecture.Editor
             EditorGUI.BeginChangeCheck();
 
             // Get properties
-            SerializedProperty useConstant = property.FindPropertyRelative("useConstant");
-            SerializedProperty constantValue = property.FindPropertyRelative("constantValue");
-            SerializedProperty variable = property.FindPropertyRelative("value");
+            SerializedProperty useConstantProperty = property.FindPropertyRelative("useConstant");
+            SerializedProperty constantValueValueProperty = property.FindPropertyRelative("constantValue");
+            SerializedProperty valueObjectProperty = property.FindPropertyRelative("valueObject");
 
             // Calculate rect for configuration button
             Rect buttonRect = new Rect(position);
@@ -43,12 +43,12 @@ namespace GameArchitecture.Editor
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            int result = EditorGUI.Popup(buttonRect, useConstant.boolValue ? 0 : 1, popupOptions, popupStyle);
+            int result = EditorGUI.Popup(buttonRect, useConstantProperty.boolValue ? 0 : 1, popupOptions, popupStyle);
 
-            useConstant.boolValue = result == 0;
+            useConstantProperty.boolValue = result == 0;
 
             EditorGUI.PropertyField(position,
-                useConstant.boolValue ? constantValue : variable,
+                useConstantProperty.boolValue ? constantValueValueProperty : valueObjectProperty,
                 GUIContent.none);
 
             if (EditorGUI.EndChangeCheck())

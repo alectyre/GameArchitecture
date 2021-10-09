@@ -4,5 +4,5 @@ using GameArchitecture.Values;
 namespace GameArchitecture.References
 {
     [System.Serializable]
-    public class ColorReference : BaseReference<Color, ColorValue> { }
+    public class ColorReference : BaseReference<Color, ColorValue, ColorValueEvent> { }
 }

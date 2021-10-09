@@ -10,12 +10,12 @@ public class FloatReferenceTest : MonoBehaviour
 
     private void Awake()
     {
-        testFloatReference.AddListenerOnValueChanged(HandleTestFloatValueChanged);
+        testFloatReference.OnValueChanged.AddListener(HandleTestFloatValueChanged);
     }
 
     private void OnDestroy()
     {
-        testFloatReference.RemoveListenerOnValueChanged(HandleTestFloatValueChanged);
+        testFloatReference.OnValueChanged.RemoveListener(HandleTestFloatValueChanged);
     }
 
     private void Update()

@@ -2,20 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 32
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c973aff2d6a71ac44a3b34aeb26a2f81, type: 3}
-  m_Name: FloatVariable 1
+  m_Script: {fileID: 11500000, guid: 73e5dd4ff6432440ea1a90456e01728f, type: 3}
+  m_Name: Test FloatEvent
   m_EditorClassIdentifier: 
-  valueType: 1
-  value: 5
-  runtimeValue: 5
   description: 
-  onValueChanged:
-    m_PersistentCalls:
-      m_Calls: []

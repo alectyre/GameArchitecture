@@ -3,5 +3,5 @@
 namespace GameArchitecture.References
 {
     [System.Serializable]
-    public class FloatReference : BaseReference<float, FloatValue> { }
+    public class FloatReference : BaseReference<float, FloatValue, FloatValueEvent> { }
 }

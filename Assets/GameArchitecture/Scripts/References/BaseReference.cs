@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using GameArchitecture.Values;
-using System;
 
 namespace GameArchitecture.References
 {
-    public abstract class BaseReference<T, V> where V : BaseValue<T>
+    public abstract class BaseReference<T, V, E> where V : BaseValue<T, E> where E : UnityEvent<T>
     {
         [SerializeField] protected bool useConstant = false;
         [SerializeField] protected T constantValue;
-        [SerializeField] protected V value = null;
+        [SerializeField] protected V valueObject = null;
 
         public T Value
         {
-            set { if (useConstant) { Debug.LogError("Trying to modify " + GetType().Name + " but it is set to Constant."); return; } this.value.Value = value; }
-            get { return useConstant ? constantValue : value.Value; }
+            set { if (useConstant) { Debug.LogError("Trying to modify " + GetType().Name + " but it is set to Constant."); return; } this.valueObject.Value = value; }
+            get { return useConstant ? constantValue : valueObject.Value; }
         }
 
-        public static implicit operator T(BaseReference<T, V> reference)
+        public static implicit operator T(BaseReference<T, V, E> reference)
         {
             return reference.Value;
         }
@@ -26,14 +26,10 @@ namespace GameArchitecture.References
             return Value.ToString();
         }
 
-        public void AddListenerOnValueChanged(Action<T> action)
+        public E OnValueChanged
         {
-            value.AddListenerOnValueChanged(action);
-        }
-
-        public void RemoveListenerOnValueChanged(Action<T> action)
-        {
-            value.RemoveListenerOnValueChanged(action);
+            get { return valueObject.OnValueChanged; }
+            set { valueObject.OnValueChanged = value; }
         }
     }
 }
