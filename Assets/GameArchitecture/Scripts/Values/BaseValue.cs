@@ -7,9 +7,7 @@ namespace GameArchitecture.Values
     {
         [SerializeField] protected ValueType valueType = ValueType.Variable;
         [SerializeField, Tooltip("Changes made to Value will be saved when exiting play mode.")] protected T value;
-#if UNITY_EDITOR
-        [SerializeField, Tooltip("RuntimeValue is used during play mode, and not saved.")] private T runtimeValue;
-#endif        
+        [SerializeField, Tooltip("RuntimeValue is used during play mode, and not saved.")] private T runtimeValue; 
         [SerializeField, TextArea(4, 20)] private string description = "";
 
         [Tooltip("OnValueChanged can only reference scene-wide objects such as other ScriptableObjects.")]
@@ -17,29 +15,13 @@ namespace GameArchitecture.Values
 
         public T Value
         {
-//#if UNITY_EDITOR
-            //get { return runtimeValue; }
-            //set { SetValue(value, ref runtimeValue); }
-//#else
+#if UNITY_EDITOR
+            get { return runtimeValue; }
+            set { SetValue(value, ref runtimeValue); }
+#else
             get { return value; }
-            set
-            {
-                if (valueType == ValueType.Constant)
-                {
-                    Debug.LogError("Trying to modify " + GetType().Name + " " + name + " but it is set to Constant.");
-                    return;
-                }
-
-                bool valueChanged = !this.value.Equals(value);
-
-                this.value = value;
-
-                if (valueChanged)
-                {
-                    onValueChanged?.Invoke(value);
-                }
-            }
-//#endif
+            set { SetValue(value, ref this.value); }
+#endif
         }
 
         public E OnValueChanged { get { return onValueChanged; } set { onValueChanged = value; } }
@@ -77,6 +59,7 @@ namespace GameArchitecture.Values
             hideFlags = HideFlags.DontUnloadUnusedAsset;
 
 #if UNITY_EDITOR
+            //Initialize runtimeValue when running in the Editor
             runtimeValue = value;
 #endif
         }
