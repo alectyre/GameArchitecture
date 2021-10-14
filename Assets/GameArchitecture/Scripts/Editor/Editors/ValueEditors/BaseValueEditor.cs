@@ -31,10 +31,13 @@ namespace GameArchitecture.Editor
                     {
                         continue;
                     }
-                    else using (new EditorGUI.DisabledScope(!Application.isPlaying))
+                    else
                     {
-                        property.floatValue = EditorGUILayout.FloatField(new GUIContent(property.displayName, property.tooltip),
-                            Application.isPlaying ? property.floatValue : valueProperty.floatValue);
+                        using (new EditorGUI.DisabledScope(!Application.isPlaying))
+                        {
+                            property.floatValue = EditorGUILayout.FloatField(new GUIContent(property.displayName, property.tooltip),
+                                Application.isPlaying ? property.floatValue : valueProperty.floatValue);
+                        }
                     }
                 }
                 else using (new EditorGUI.DisabledScope( "m_Script" == property.propertyPath))

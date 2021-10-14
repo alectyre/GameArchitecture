@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -12,12 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9757025f636417b9059b46bb037e81, type: 3}
   m_Name: Test FloatSet
   m_EditorClassIdentifier: 
+  setType: 1
+  allowDuplicates: 0
   items:
   - 6
   - 7
   - 8
   - 9
   - 9
+  runtimeItems:
+  - 6
+  - 7
+  - 8
   - 9
-  allowDuplicates: 1
-  runtimeEditable: 1
+  description: 
+  onSetChanged:
+    m_PersistentCalls:
+      m_Calls: []

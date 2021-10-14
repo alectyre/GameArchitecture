@@ -8,6 +8,18 @@ public class FloatSetTest : MonoBehaviour
     [SerializeField] private Text itemsText = null;
     [SerializeField] private Text runTimeItemsText = null;
 
+    private void Awake()
+    {
+        testFloatSet.OnSetChanged.AddListener(UpdateText);
+
+        UpdateText();
+    }
+
+    private void OnDestroy()
+    {
+        testFloatSet.OnSetChanged.RemoveListener(UpdateText);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -34,13 +46,16 @@ public class FloatSetTest : MonoBehaviour
         {
             testFloatSet.Add(5f);
         }
-
-        UdpateText();
     }
 
-    private void UdpateText()
+    private void UpdateText()
     {
         itemsText.text = testFloatSet.ItemsToString();
-        runTimeItemsText.text = testFloatSet.RuntimeItemsToString();
+        runTimeItemsText.text = testFloatSet.ItemsToString(true);
+
+        foreach(float item in testFloatSet)
+        {
+            Debug.Log(item);
+        }
     }
 }
