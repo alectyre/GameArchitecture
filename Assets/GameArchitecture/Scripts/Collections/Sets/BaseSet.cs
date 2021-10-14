@@ -1,25 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameArchitecture.Collections
 {
-    public abstract class BaseSet<T> : ScriptableObject
+    public abstract class BaseSet<T> : ScriptableObject, IEnumerable<T>
     {
         [SerializeField] protected SetType setType = SetType.Variable;
+        [SerializeField, Tooltip("Unique items only enforced during runtime using Add function.")] private bool allowDuplicates = false;
         [SerializeField] private List<T> items = null;
-        [SerializeField, Tooltip("Unique items only enforced during runtime using Add function.")] private bool allowDuplicates = true;
-
         [SerializeField] private List<T> runtimeItems = null;
+        [SerializeField, TextArea(4, 20)] private string description = "";
+        [Space, SerializeField] private UnityEvent onSetChanged;
 
-        private List<T> Items 
-        {
-#if UNITY_EDITOR
-            get { return runtimeItems; }
-#else
-            get { return items; }
-#endif
-        }
+        public UnityEvent OnSetChanged { get { return onSetChanged; } set { onSetChanged = value; } }
+
+        public string Description { get { return description; } }
+
+        public SetType SetType { get { return setType; } }
+
+
+
+        #region Public Set functions
 
         public bool AllowDuplicates
         {
@@ -39,6 +43,7 @@ namespace GameArchitecture.Collections
             if (allowDuplicates || !Items.Contains(item))
             {
                 Items.Add(item);
+                onSetChanged?.Invoke();
             }
         }
 
@@ -47,6 +52,7 @@ namespace GameArchitecture.Collections
             if (!Items.Contains(item))
             {
                 Items.Remove(item);
+                onSetChanged?.Invoke();
             }
         }
 
@@ -57,7 +63,11 @@ namespace GameArchitecture.Collections
 
         public void Clear()
         {
-            Items.Clear();
+            if (Items.Count > 0)
+            {
+                Items.Clear();
+                onSetChanged?.Invoke();
+            }
         }
 
         public int Count()
@@ -65,12 +75,49 @@ namespace GameArchitecture.Collections
             return Items.Count;
         }
 
+        public List<T> ToList()
+        {
+            return new List<T>(Items);
+        }
+
+        #endregion
+
+
+
+        #region IEnumerable funcions
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return Items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return Items.GetEnumerator();
+        }
+
+        #endregion
+
+
+
+        #region Private functions
+
+        private List<T> Items
+        {
+#if UNITY_EDITOR
+            get { return runtimeItems; }
+#else
+            get { return items; }
+#endif
+        }
 
         private void OnEnable()
         {
-            CopyItemsToRuntimeItems();
-
             hideFlags = HideFlags.DontUnloadUnusedAsset; //Prevents the asset from being unloaded when there are no scene references to it
+
+#if UNITY_EDITOR
+            CopyItemsToRuntimeItems();
+#endif
         }
 
         private void CopyItemsToRuntimeItems()
@@ -85,17 +132,22 @@ namespace GameArchitecture.Collections
             }
         }
 
+        #endregion
+
+
 
         #region Debug
 
-        public string ItemsToString()
+        public string ItemsToString(bool runtimeItems = false)
         {
-            return ListToString(items);
-        }
-
-        public string RuntimeItemsToString()
-        {
-            return ListToString(runtimeItems);
+            if (runtimeItems)
+            {
+                return ListToString(this.runtimeItems);
+            }
+            else
+            {
+                return ListToString(items);
+            }
         }
 
         private string ListToString(List<T> items)
@@ -116,7 +168,7 @@ namespace GameArchitecture.Collections
 
             return output;
         }
-
+        
         #endregion
     }
 }

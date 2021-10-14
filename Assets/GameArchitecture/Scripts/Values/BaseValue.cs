@@ -9,8 +9,6 @@ namespace GameArchitecture.Values
         [SerializeField, Tooltip("Changes made to Value will be saved when exiting play mode.")] protected T value;
         [SerializeField, Tooltip("RuntimeValue is used during play mode, and not saved.")] private T runtimeValue; 
         [SerializeField, TextArea(4, 20)] private string description = "";
-
-        [Tooltip("OnValueChanged can only reference scene-wide objects such as other ScriptableObjects.")]
         [Space, SerializeField] protected E onValueChanged;
 
         public T Value
