@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Test FloatEvent
   m_EditorClassIdentifier: 
   description: 
+  onEventRaised:
+    m_PersistentCalls:
+      m_Calls: []

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.Events
 {
-    [System.Serializable] public class FloatUnityevent : UnityEvent<float> { }
-
     [CreateAssetMenu(fileName = "NewFloatEvent", menuName = "GameArchitecture/Events/FloatEvent")]
-    public class FloatEvent : BaseEvent<float, FloatUnityevent> { }
+    public class FloatEvent : BaseEvent<float, FloatUnityEvent> { }
 }
