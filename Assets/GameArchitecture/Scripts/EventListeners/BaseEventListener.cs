@@ -4,12 +4,10 @@ using GameArchitecture.Events;
 
 namespace GameArchitecture.EventListeners
 {
-    public abstract class BaseEventListener<T, GE, UE> : MonoBehaviour where GE : BaseEvent<T> where UE : UnityEvent<T>
+    public abstract class BaseEventListener<T, GE, UE> : MonoBehaviour where GE : BaseEvent<T, UE> where UE : UnityEvent<T>
     {
         [SerializeField] private GE gameEvent= null;
-        [SerializeField] private UE onEventTriggered = null;
-
-
+        [SerializeField, Space] private UE onEventTriggered = null;
 
         private void HandleEvent(T item)
         {
@@ -20,7 +18,7 @@ namespace GameArchitecture.EventListeners
         {
             if (gameEvent != null)
             {
-                gameEvent.RegisterListener(HandleEvent);
+                gameEvent.OnEventRaise.AddListener(HandleEvent);
             }
         }
 
@@ -28,7 +26,7 @@ namespace GameArchitecture.EventListeners
         {
             if (gameEvent != null)
             {
-                gameEvent.UnregisterListener(HandleEvent);
+                gameEvent.OnEventRaise.RemoveListener(HandleEvent);
             }
         }
     }
