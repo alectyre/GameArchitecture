@@ -8,7 +8,7 @@ namespace GameArchitecture.Values
         [SerializeField] protected ValueType valueType = ValueType.Variable;
         [SerializeField, Tooltip("Changes made to Value will be saved when exiting play mode.")] protected T value;
         [SerializeField, Tooltip("RuntimeValue is used during play mode, and not saved.")] private T runtimeValue; 
-        [SerializeField, TextArea(4, 20)] private string description = "";
+        [SerializeField, LockableTextArea(4, 20)] private string description = "";
         [Space, SerializeField] protected E onValueChanged;
 
         public T Value

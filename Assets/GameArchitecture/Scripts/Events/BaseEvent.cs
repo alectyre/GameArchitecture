@@ -5,7 +5,7 @@ namespace GameArchitecture.Events
 {
     public abstract class BaseEvent<T, E> : ScriptableObject where E : UnityEvent<T>
     {
-        [SerializeField, TextArea(4, 20)] private string description = "";
+        [SerializeField, LockableTextArea(4, 20)] private string description = "";
         [SerializeField, Space] private E onEventRaised; 
 
         public E OnEventRaise { get { return onEventRaised; } set { onEventRaised = value; } }
