@@ -23,38 +23,30 @@ public sealed class LockableTextAreaDrawer : PropertyDrawer
 {   
     public bool isLocked = true;
 
-    private readonly string[] popupOptions = { "Locked", "Unlocked" };
-
-    /// <summary> Cached style to use to draw the popup button. </summary>
-    private GUIStyle popupStyle;
-
+    private GUIStyle buttonStyle;
     private const int lineHeight = 13;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         if (property.propertyType == SerializedPropertyType.String)
         {
-            if (popupStyle == null)
+            if (buttonStyle == null)
             {
-                popupStyle = new GUIStyle(GUI.skin.GetStyle("PaneOptions"))
-                {
-                    imagePosition = ImagePosition.ImageOnly
-                };
+                buttonStyle = new GUIStyle(GUI.skin.GetStyle("iconButton"));
             }
 
             label = EditorGUI.BeginProperty(position, label, property);
             Rect buttonRect = EditorGUI.PrefixLabel(position, label);
-            buttonRect.yMin += popupStyle.margin.top;
-            buttonRect.width = (popupStyle.fixedWidth + popupStyle.margin.right) * 2;
+            buttonRect.width = EditorGUIUtility.singleLineHeight;
             buttonRect.height = EditorGUIUtility.singleLineHeight;
-            
+
             EditorGUI.BeginChangeCheck();
 
-            int result = EditorGUI.Popup(buttonRect, isLocked ? 0 : 1, popupOptions, popupStyle);
-            isLocked = result == 0;
-
-            buttonRect.x += buttonRect.width * 0.5f;
-            EditorGUI.LabelField(buttonRect, isLocked ? EditorGUIUtility.IconContent("IN LockButton on") : EditorGUIUtility.IconContent("IN LockButton"));
+            GUIContent image = isLocked ? EditorGUIUtility.IconContent("IN LockButton on") : EditorGUIUtility.IconContent("IN LockButton");
+            if(GUI.Button(buttonRect, image, buttonStyle))
+            {
+                isLocked = !isLocked;
+            }
 
             string newValue = "";
 

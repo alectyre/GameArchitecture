@@ -14,19 +14,13 @@ public sealed class PopPlatformAttributePropertyDrawer : PropertyDrawer
 {
     public bool isLocked = true;
 
-    private readonly string[] popupOptions = { "Locked", "Unlocked" };
-
-    /// <summary> Cached style to use to draw the popup button. </summary>
-    private GUIStyle popupStyle;
+    private GUIStyle buttonStyle;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        if (popupStyle == null)
+        if (buttonStyle == null)
         {
-            popupStyle = new GUIStyle(GUI.skin.GetStyle("PaneOptions"))
-            {
-                imagePosition = ImagePosition.ImageOnly
-            };
+            buttonStyle = new GUIStyle(GUI.skin.GetStyle("iconButton"));
         }
 
         label = EditorGUI.BeginProperty(position, label, property);
@@ -36,18 +30,20 @@ public sealed class PopPlatformAttributePropertyDrawer : PropertyDrawer
 
         // Calculate rect for configuration button
         Rect buttonRect = new Rect(position);
-        buttonRect.yMin += popupStyle.margin.top;
-        buttonRect.width = popupStyle.fixedWidth + popupStyle.margin.right;
+        buttonRect.yMin += buttonStyle.margin.top;
+        buttonRect.width = buttonStyle.fixedWidth + buttonStyle.margin.right;
         position.xMin = buttonRect.xMax;
 
         // Store old indent level and set it to 0, the PrefixLabel takes care of it
         int indent = EditorGUI.indentLevel;
         EditorGUI.indentLevel = 0;
 
-        int result = EditorGUI.Popup(buttonRect, isLocked ? 0 : 1, popupOptions, popupStyle);
-
-        isLocked = result == 0;
-
+        GUIContent image = isLocked ? EditorGUIUtility.IconContent("IN LockButton on") : EditorGUIUtility.IconContent("IN LockButton");
+        if (GUI.Button(buttonRect, image, buttonStyle))
+        {
+            isLocked = !isLocked;
+        }
+        
         using (new EditorGUI.DisabledScope(isLocked))
         {
             EditorGUI.PropertyField(position, property, GUIContent.none);
