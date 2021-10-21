@@ -1,9 +1,7 @@
-﻿using UnityEngine.Events;
-using GameArchitecture.Events;
+﻿using GameArchitecture.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.EventListeners
 {
-    [System.Serializable] public class UnityFloatEvent : UnityEvent<float> { }
-
-    public class FloatEventListener : BaseEventListener<float, FloatEvent, UnityFloatEvent> { }
+    public class FloatEventListener : BaseEventListener<float, FloatEvent, FloatUnityEvent> { }
 }

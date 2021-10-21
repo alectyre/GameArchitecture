@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using GameArchitecture.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.EventListeners
 {
-    [System.Serializable] public class UnityTransformEvent : UnityEvent<Transform> { }
-
-    public class TransformEventListener : BaseEventListener<Transform, TransformEvent, UnityTransformEvent> { }
+    public class TransformEventListener : BaseEventListener<Transform, TransformEvent, TransformUnityEvent> { }
 }

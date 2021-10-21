@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.Values
 {
-    [System.Serializable] public class IntValueEvent : UnityEvent<int> { }
-
     [CreateAssetMenu(fileName = "NewIntValue", menuName = "GameArchitecture/Values/IntValue")]
-    public class IntValue : BaseValue<int, IntValueEvent> { }
+    public class IntValue : BaseValue<int, IntUnityEvent> { }
 }

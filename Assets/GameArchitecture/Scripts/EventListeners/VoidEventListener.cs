@@ -1,9 +1,7 @@
-﻿using UnityEngine.Events;
-using GameArchitecture.Events;
+﻿using GameArchitecture.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.EventListeners
 {
-    [System.Serializable] public class UnityVoidEvent : UnityEvent<Void> { }
-
-    public class VoidEventListener : BaseEventListener<Void, VoidEvent, UnityVoidEvent> { }
+    public class VoidEventListener : BaseEventListener<Void, VoidEvent, VoidUnityEvent> { }
 }

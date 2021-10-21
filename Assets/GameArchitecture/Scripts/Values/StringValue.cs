@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.Values
 {
-    [System.Serializable] public class StringValueEvent : UnityEvent<string> { }
-
     [CreateAssetMenu(fileName = "NewStringValue", menuName = "GameArchitecture/Values/StringValue")]
-    public class StringValue : BaseValue<string, StringValueEvent> { }
+    public class StringValue : BaseValue<string, StringUnityEvent> { }
 }

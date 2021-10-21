@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using GameArchitecture.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.EventListeners
 {
-    [System.Serializable] public class UnityColorEvent : UnityEvent<Color> { }
-
-    public class ColorEventListener : BaseEventListener<Color, ColorEvent, UnityColorEvent> { }
+    public class ColorEventListener : BaseEventListener<Color, ColorEvent, ColorUnityEvent> { }
 }

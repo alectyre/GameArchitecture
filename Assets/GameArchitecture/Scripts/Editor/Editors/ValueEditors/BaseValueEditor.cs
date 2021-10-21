@@ -40,9 +40,12 @@ namespace GameArchitecture.Editor
                         }
                     }
                 }
-                else using (new EditorGUI.DisabledScope( "m_Script" == property.propertyPath))
+                else
                 {
-                    EditorGUILayout.PropertyField(property, true);
+                    using (new EditorGUI.DisabledScope("m_Script" == property.propertyPath))
+                    {
+                        EditorGUILayout.PropertyField(property, true);
+                    }
                 }
                 expanded = false;
             }

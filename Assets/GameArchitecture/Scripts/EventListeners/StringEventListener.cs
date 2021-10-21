@@ -1,10 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
-using GameArchitecture.Events;
+﻿using GameArchitecture.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.EventListeners
 {
-    [System.Serializable] public class UnityStringEvent : UnityEvent<string> { }
-
-    public class StringEventListener : BaseEventListener<string, StringEvent, UnityStringEvent> { }
+    public class StringEventListener : BaseEventListener<string, StringEvent, StringUnityEvent> { }
 }

@@ -1,9 +1,7 @@
-﻿using UnityEngine.Events;
-using GameArchitecture.Events;
+﻿using GameArchitecture.Events;
+using GameArchitecture.UnityEvents;
 
 namespace GameArchitecture.EventListeners
 {
-    [System.Serializable] public class UnityBboolEvent : UnityEvent<bool> { }
-
-    public class BoolEventListener : BaseEventListener<bool, BoolEvent, UnityBboolEvent> { }
+    public class BoolEventListener : BaseEventListener<bool, BoolEvent, BoolUnityEvent> { }
 }

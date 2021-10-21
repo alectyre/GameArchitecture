@@ -12,7 +12,7 @@ namespace GameArchitecture.Collections
         [SerializeField, Tooltip("Unique items only enforced during runtime using Add function.")] private bool allowDuplicates = false;
         [SerializeField] private List<T> items = null;
         [SerializeField] private List<T> runtimeItems = null;
-        [SerializeField, TextArea(4, 20)] private string description = "";
+        [SerializeField, LockableTextArea(4, 20)] private string description = "";
         [Space, SerializeField] private UnityEvent onSetChanged;
 
         public UnityEvent OnSetChanged { get { return onSetChanged; } set { onSetChanged = value; } }
@@ -116,7 +116,10 @@ namespace GameArchitecture.Collections
             hideFlags = HideFlags.DontUnloadUnusedAsset; //Prevents the asset from being unloaded when there are no scene references to it
 
 #if UNITY_EDITOR
-            CopyItemsToRuntimeItems();
+            if (Application.isPlaying)
+            {
+                CopyItemsToRuntimeItems();
+            }
 #endif
         }
 

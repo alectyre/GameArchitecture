@@ -9,8 +9,7 @@ namespace GameArchitecture.Editor
         /// <summary>
         /// Options to display in the popup to select constant or variable.
         /// </summary>
-        private readonly string[] popupOptions =
-            { "Use Constant", "Use Variable" };
+        private readonly string[] popupOptions = { "Use Constant", "Use Variable" };
 
         /// <summary> Cached style to use to draw the popup button. </summary>
         private GUIStyle popupStyle;
