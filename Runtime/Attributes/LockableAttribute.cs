@@ -7,10 +7,8 @@ using UnityEditor;
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
 public sealed class LockableAttribute : PropertyAttribute { }
 
-
-#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(LockableAttribute))]
-public sealed class PopPlatformAttributePropertyDrawer : PropertyDrawer
+public sealed class LockableAttributePropertyDrawer : PropertyDrawer
 {
     public bool isLocked = true;
 
@@ -56,4 +54,3 @@ public sealed class PopPlatformAttributePropertyDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 }
-#endif
