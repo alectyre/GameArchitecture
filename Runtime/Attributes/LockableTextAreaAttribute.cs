@@ -19,7 +19,7 @@ public sealed class LockableTextAreaAttribute : PropertyAttribute
 }
 
 [CustomPropertyDrawer(typeof(LockableTextAreaAttribute))]
-public sealed class LockableTextAreaDrawer : PropertyDrawer
+public sealed class LockableTextAreaAttributePropertyDrawer : PropertyDrawer
 {   
     public bool isLocked = true;
 
