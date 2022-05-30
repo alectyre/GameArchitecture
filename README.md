@@ -7,7 +7,7 @@ An implementation of ScriptableObject as values / events as per the Unite Austin
 or edit your project's Packages/manifest.json to include the follow:
 ```
 "dependencies": {
-  "alectyre.gamearchitecture": "https://github.com/alectyre/gamearchitecture.git
+  "alectyre.gamearchitecture": "https://github.com/alectyre/gamearchitecture.git"
 }
 ```
 
