@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Pooling
+namespace GameArchitecture.Collections
 {
     /// <summary>
     /// Manages a cross-scene pool of instances of a prefab. Pooled objects are considered returned to the pool while inactive.
