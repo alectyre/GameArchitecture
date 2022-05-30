@@ -1,6 +1,6 @@
 {
   "name": "alectyre.gamearchitecture",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Game Architecture",
   "description": "A ScriptableObject game architecture package.",
   "unity": "2018.1",

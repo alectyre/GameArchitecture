@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Pooling
+namespace GameArchitecture.Collections
 {
     /// <summary>
     /// Manages a cross-scene pool of instances of a prefab. Pooled objects are considered returned to the pool while inactive.
@@ -22,13 +22,11 @@ namespace Pooling
         {
             public GameObject GameObject;
             public int SceneIndex;
-            public float RetrievalTime;
 
             public PooledObjectData(GameObject gameObject, int sceneIndex)
             {
                 GameObject = gameObject;
                 SceneIndex = sceneIndex;
-                RetrievalTime = float.MaxValue;
             }
         }
 
@@ -55,9 +53,11 @@ namespace Pooling
                     if (pooledObject.SceneIndex == scene.buildIndex)
                     {
                         pooledObject.SceneIndex = -1;
-                        
-                        if(pooledObject.GameObject != null)
+
+                        if (pooledObject.GameObject != null)
+                        {
                             pooledObject.GameObject.SetActive(false);
+                        }
                     }
                 }
             }
@@ -101,7 +101,10 @@ namespace Pooling
 
                     //Add one if we empty the pool
                     if (pooledObjects.Count == 0)
+                    {
                         TryGrowPool(out pooledObject);
+                    }
+
                     continue;
                 }
 
@@ -127,7 +130,6 @@ namespace Pooling
             if (gameObject != null)
             {
                 pooledObject.SceneIndex = sceneIndex;
-                pooledObject.RetrievalTime = Time.realtimeSinceStartup;
                 pooledObjects[index] = pooledObject;
                 gameObject.SetActive(true);
             }
@@ -174,8 +176,7 @@ namespace Pooling
         {
             if (pooledObjects == null)
             {
-                if (pooledObjects == null)
-                    pooledObjects = new List<PooledObjectData>();
+                pooledObjects = new List<PooledObjectData>();
             }
 
             poolSize = Mathf.Min(poolSize, maxSize);
@@ -192,10 +193,9 @@ namespace Pooling
             {
                 foreach (PooledObjectData pooledObject in pooledObjects)
                 {
-                    if (pooledObject.GameObject != null)
+                    if (pooledObject.GameObject != null && Application.isPlaying)
                     {
-                        if (Application.isPlaying)
-                            Destroy(pooledObject.GameObject);
+                        Destroy(pooledObject.GameObject);
                     }
                 }
 
@@ -212,7 +212,9 @@ namespace Pooling
             }
 
             if (pooledObjects == null)
+            {
                 pooledObjects = new List<PooledObjectData>();
+            }
 
             GameObject gameObject = Instantiate(prefab);
             gameObject.name = prefab.name;
